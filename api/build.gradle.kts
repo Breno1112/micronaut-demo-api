@@ -25,6 +25,11 @@ dependencies {
     implementation("javax.annotation:javax.annotation-api")
     runtimeOnly("ch.qos.logback:logback-classic")
     implementation("io.micronaut:micronaut-validation")
+    implementation("io.micronaut.sql:micronaut-jdbc-hikari")
+    implementation("com.h2database:h2")
+    implementation("mysql:mysql-connector-java")
+    annotationProcessor("io.micronaut.data:micronaut-data-processor")
+    implementation("io.micronaut.data:micronaut-data-jdbc")
 
 }
 

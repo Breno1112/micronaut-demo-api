@@ -1,3 +1,9 @@
 micronaut:
   application:
     name: demoAPI
+datasources:
+  default:
+    url: jdbc:mysql://localhost:3306/micronaut
+    username: root
+    password: DRM@oei200
+    dialect: MYSQL

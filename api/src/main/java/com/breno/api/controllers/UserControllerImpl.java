@@ -7,14 +7,16 @@ import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 
+import javax.inject.Inject;
 import java.util.List;
 
 
 @Controller
 public class UserControllerImpl{
     private static final String LIST_USERS_PATH = "/users";
-    private final BeanContext context = BeanContext.run();
-    private final UserEngine userEngine = context.getBean(UserEngine.class);
+
+    @Inject
+    private UserEngine userEngine;
 
     @Get(value = LIST_USERS_PATH, produces = MediaType.APPLICATION_JSON)
     public List<UserDTO> getAllUsers() {

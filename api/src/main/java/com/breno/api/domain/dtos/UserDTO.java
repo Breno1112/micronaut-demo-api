@@ -2,17 +2,17 @@ package com.breno.api.domain.dtos;
 
 public class UserDTO {
 
-    private String id;
+    private Long id;
 
     private String name;
 
     private Integer age;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
