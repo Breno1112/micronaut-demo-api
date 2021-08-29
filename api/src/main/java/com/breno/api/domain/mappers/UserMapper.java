@@ -28,4 +28,14 @@ public class UserMapper {
         userEntities.forEach(value -> response.add(this.fromEntityToDTO(value)));
         return response;
     }
+
+    public void updateAllProperties(@Nullable UserDTO userDTO, UserEntity userEntity){
+        if(userDTO != null){
+            userEntity.setAge(userDTO.getAge());
+            userEntity.setName(userDTO.getName());
+        } else {
+            userEntity.setName(null);
+            userEntity.setAge(null);
+        }
+    }
 }

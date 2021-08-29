@@ -17,6 +17,8 @@ public class UserEngineImpl implements UserEngine {
 
     private static final String USER_DELETED_MESSAGE = "User successfully deleted!";
     private static final String USER_NOT_FOUND_MESSAGE = "User not found!";
+    private static final String USER_SUCCESSFULLY_UPDATED = "User successfully updated!";
+    private static final String USER_NOT_UPDATED = "User not updated!";
 
 
     @Inject
@@ -44,6 +46,25 @@ public class UserEngineImpl implements UserEngine {
             this.userRepository.delete(optionalUser.get());
             response.setData(this.userMapper.fromEntityToDTO(optionalUser.get()));
             response.setMessage(USER_DELETED_MESSAGE);
+        } else {
+            response.setMessage(USER_NOT_FOUND_MESSAGE);
+        }
+        return response;
+    }
+
+    @Override
+    public ActionExecutionResponseDTO updateUser(Long id, UserDTO userDTO) {
+        final ActionExecutionResponseDTO response = new ActionExecutionResponseDTO();
+        final Optional<UserEntity> optionalUser = this.userRepository.findById(id);
+        if(optionalUser.isPresent()){
+            try {
+                final UserEntity userEntity = optionalUser.get();
+                this.userMapper.updateAllProperties(userDTO, userEntity);
+                response.setData(this.userMapper.fromEntityToDTO(this.userRepository.update(userEntity)));
+                response.setMessage(USER_SUCCESSFULLY_UPDATED);
+            } catch (Exception e) {
+                response.setMessage(USER_NOT_UPDATED);
+            }
         } else {
             response.setMessage(USER_NOT_FOUND_MESSAGE);
         }

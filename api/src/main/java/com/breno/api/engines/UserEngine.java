@@ -11,4 +11,6 @@ public interface UserEngine {
     UserDTO getUserById(Long id);
 
     ActionExecutionResponseDTO deleteUser(Long id);
+
+    ActionExecutionResponseDTO updateUser(Long id, UserDTO userDTO);
 }
