@@ -19,6 +19,8 @@ public class UserEngineImpl implements UserEngine {
     private static final String USER_NOT_FOUND_MESSAGE = "User not found!";
     private static final String USER_SUCCESSFULLY_UPDATED = "User successfully updated!";
     private static final String USER_NOT_UPDATED = "User not updated!";
+    private static final String USER_SUCCESSFULLY_CREATED = "User successfully created!";
+    private static final String USER_NOT_CREATED = "User not created!";
 
 
     @Inject
@@ -67,6 +69,23 @@ public class UserEngineImpl implements UserEngine {
             }
         } else {
             response.setMessage(USER_NOT_FOUND_MESSAGE);
+        }
+        return response;
+    }
+
+    @Override
+    public ActionExecutionResponseDTO addUser(UserDTO userDTO) {
+        final ActionExecutionResponseDTO response = new ActionExecutionResponseDTO();
+        try{
+            final UserEntity userEntity = this.userMapper.fromDtoToEntity(userDTO);
+            if(userEntity != null){
+                response.setData(this.userMapper.fromEntityToDTO(this.userRepository.save(userEntity)));
+                response.setMessage(USER_SUCCESSFULLY_CREATED);
+            } else {
+                response.setMessage(USER_NOT_CREATED);
+            }
+        } catch (Exception e){
+            response.setMessage(USER_NOT_CREATED);
         }
         return response;
     }

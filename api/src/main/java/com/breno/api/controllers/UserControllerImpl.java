@@ -53,4 +53,9 @@ public class UserControllerImpl{
             return HttpResponse.badRequest();
         }
     }
+
+    @Post(value = LIST_USERS_PATH, produces = MediaType.APPLICATION_JSON)
+    public HttpResponse<ActionExecutionResponseDTO> createUser(@Body UserDTO userDTO){
+        return HttpResponse.created(this.userEngine.addUser(userDTO));
+    }
 }

@@ -38,4 +38,14 @@ public class UserMapper {
             userEntity.setAge(null);
         }
     }
+
+    public @Nullable UserEntity fromDtoToEntity(@Nullable UserDTO userDTO){
+        if(userDTO == null){
+            return null;
+        }
+        final UserEntity userEntity = new UserEntity();
+        userEntity.setAge(userDTO.getAge());
+        userEntity.setName(userDTO.getName());
+        return userEntity;
+    }
 }
