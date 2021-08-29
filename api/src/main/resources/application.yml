@@ -1,6 +1,7 @@
 micronaut:
   application:
     name: demoAPI
+
 datasources:
   default:
     url: jdbc:mysql://localhost:3306/micronaut

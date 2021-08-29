@@ -30,9 +30,19 @@ dependencies {
     implementation("mysql:mysql-connector-java")
     annotationProcessor("io.micronaut.data:micronaut-data-processor")
     implementation("io.micronaut.data:micronaut-data-jdbc")
+    testAnnotationProcessor("io.micronaut:micronaut-inject-java")
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testImplementation("io.micronaut.test:micronaut-test-junit5:3.0.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+
 
 }
 
+tasks {
+    "test"(Test::class) {
+        useJUnitPlatform()
+    }
+}
 
 application {
     mainClass.set("com.breno.api.Application")
