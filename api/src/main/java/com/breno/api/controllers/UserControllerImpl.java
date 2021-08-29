@@ -1,10 +1,12 @@
 package com.breno.api.controllers;
 
+import com.breno.api.domain.dtos.ActionExecutionResponseDTO;
 import com.breno.api.domain.dtos.UserDTO;
 import com.breno.api.engines.UserEngine;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
+import io.micronaut.http.annotation.Delete;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.PathVariable;
 
@@ -30,6 +32,16 @@ public class UserControllerImpl{
         try{
             final Long longId = Long.parseLong(id);
             return HttpResponse.ok(this.userEngine.getUserById(longId));
+        } catch (NumberFormatException e){
+            return HttpResponse.badRequest();
+        }
+    }
+
+    @Delete(value = GET_USER_BY_ID_PATH, produces = MediaType.APPLICATION_JSON)
+    public HttpResponse<ActionExecutionResponseDTO> deleteUser(@PathVariable(value = "id") String id){
+        try{
+            final Long longId = Long.parseLong(id);
+            return HttpResponse.ok(this.userEngine.deleteUser(longId));
         } catch (NumberFormatException e){
             return HttpResponse.badRequest();
         }
