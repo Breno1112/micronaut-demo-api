@@ -24,4 +24,9 @@ public class UserEngineImpl implements UserEngine {
     public List<UserDTO> getAllUsers() {
         return userMapper.fromEntitiesToDTOs(this.userRepository.findAll());
     }
+
+    @Override
+    public UserDTO getUserById(Long id) {
+        return userMapper.fromEntityToDTO(this.userRepository.findById(id).orElse(null));
+    }
 }
